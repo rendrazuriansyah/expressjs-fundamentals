@@ -32,6 +32,16 @@ app.get('/dogs/:id/photos/:photoId', (req, res) => {
   res.send(`get woof photo id ${photoId} for dog id ${id}`);
 });
 
+// misal: http://localhost:3000/search?keyword=dogs&sort=asc
+app.get('/search', (req, res) => {
+  const { keyword, sort } = req.query;
+  // res.send(req.query); // req.query = { keyword: 'dogs', sort: 'asc' }
+  if (!keyword || !sort) {
+    return res.send('no query');
+  }
+  res.send(`searching for ${keyword} in ${sort} order`);
+});
+
 app.use((req, res) => {
   res.status(404).send('Not Found');
 });
